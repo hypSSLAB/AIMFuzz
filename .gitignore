@@ -1,0 +1,10 @@
+# vscode
+.vscode/
+
+#
+test/
+pin_test/
+
+# ignore
+*.so
+*.o
