@@ -95,7 +95,12 @@ static BOOL OnCommand(THREADID, CONTEXT* ctxt, const std::string& _cmd, std::str
 
   if (parsed_cmd[0].compare("tag") == 0 && parsed_cmd.size() > 1) {
     if (parsed_cmd[1].compare("all") == 0) {
-      print_tagged_memory();
+      int pollute = 0;
+      if (parsed_cmd.size() > 2 && parsed_cmd[2].compare("pollute") == 0) {
+        pollute = 1;
+      }
+
+      print_tagged_memory(pollute);
       return TRUE;
     } else if (parsed_cmd.size() > 2) {
       ADDRINT addr = strtol(parsed_cmd[1].c_str(), 0, 16);
@@ -122,11 +127,46 @@ static BOOL OnCommand(THREADID, CONTEXT* ctxt, const std::string& _cmd, std::str
 }
 
 int pollution_mode;
+
+extern double callee_weight;
+extern int taint_weight;
+
 int main(int argc, char *argv[]) {
   int i;
 
   std::cout << "start track.cpp" << std::endl;
   PIN_InitSymbols();
+
+  char *temp_callee_str;
+  char *temp_taint_str;
+  double temp_callee;
+  int temp_taint;
+
+  if ((temp_callee_str=getenv("CALLEE_WEIGHT"))) {
+    sscanf(temp_callee_str, "%lf", &temp_callee);
+    cout << "callee_weight : " << temp_callee << endl;
+    callee_weight = temp_callee;
+  }
+  if ((temp_taint_str=getenv("TAINT_WEIGHT"))) {
+    sscanf(temp_taint_str, "%d", &temp_taint);
+    cout << "taint_weight : " << temp_taint << endl;
+    taint_weight = temp_taint;
+  }
+
+  for (i = 0; i < argc; i++) {
+    if (string(argv[i]).compare("-w") == 0) {
+      cout << "Activate Pollution Mode" << endl;
+      pollution_mode = 1;
+
+      for (int j = i; j < argc-1; j++) {
+        argv[j] = argv[j+1];
+      }
+      argc--;
+
+      break;
+    }
+  }
+
 
   for (i = 0; i < argc; i++) {
     if (string(argv[i]).compare("-P") == 0) {

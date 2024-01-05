@@ -312,6 +312,8 @@ static void hook_call_ins(ADDRINT applicationIP, ADDRINT sp, ADDRINT target) {
     new_node->seq_num = seq_num++;
     new_node->depth = caller_node->depth + 1;
     new_node->taint_inst_used = 0;
+    new_node->modified_tag_used = 0;
+    new_node->origianl_tag_used = 0;
 
     caller_node->callee.pop_back();
     caller_node->callee.push_back(new_node);
@@ -333,6 +335,8 @@ static void hook_call_ins(ADDRINT applicationIP, ADDRINT sp, ADDRINT target) {
     new_node->seq_num = seq_num++;
     new_node->depth = new_node->caller->depth + 1;
     new_node->taint_inst_used = 0;
+    new_node->modified_tag_used = 0;
+    new_node->origianl_tag_used = 0;
     
     cur_node->callee.push_back(new_node);
     cur_node = new_node;
@@ -348,6 +352,8 @@ static void hook_call_ins(ADDRINT applicationIP, ADDRINT sp, ADDRINT target) {
   new_node->seq_num = seq_num++;
   new_node->depth = new_node->caller->depth + 1;
   new_node->taint_inst_used = 0;
+  new_node->modified_tag_used = 0;
+  new_node->origianl_tag_used = 0;
 
   //cout << "==============call============" << endl;
   //cout << "cur_node : " << cur_node->func_name << endl;
@@ -420,6 +426,8 @@ static void hook_main_call(ADDRINT applicationIP, ADDRINT sp) {
   new_node->seq_num = seq_num++;
   new_node->depth = 0;
   new_node->taint_inst_used = 0;
+  new_node->modified_tag_used = 0;
+  new_node->origianl_tag_used = 0;
 
   root_node = new_node;
   cur_node = new_node;

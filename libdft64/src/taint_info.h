@@ -53,8 +53,17 @@ typedef struct FuncNode {
     //map<uint64_t, uint64_t> taint_inst;
     int depth;
     int taint_inst_used;
+    uint64_t origianl_tag_used;
+    uint64_t modified_tag_used;
 } FuncNode;
 
+typedef struct ScoreNode {
+    string func_name;
+    int seq_num;
+    double my_score;
+    int depth;
+} ScoreNode;
+ 
 extern string target2find;
 extern int TAINT_MODE;
 extern int taint_logging;
@@ -69,7 +78,7 @@ void insert_tagVal(tag_t tag, char val);
 void print_tagVal();
 
 tag_t is_tainted(ADDRINT addr, size_t size); 
-void print_tagged_memory();
+void print_tagged_memory(int pollute);
 
 void log_before_taint_mem_list();
 void print_func_taint_mem_info();

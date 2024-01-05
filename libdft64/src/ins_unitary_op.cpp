@@ -14,8 +14,8 @@ static void PIN_FAST_ANALYSIS_CALL r2r_unitary_opb_u(THREADID tid,
   }
   
   if (pollution_mode) {
-    RTAG[DFT_REG_RAX][0] = -1;
-    RTAG[DFT_REG_RAX][1] = -1;
+    RTAG[DFT_REG_RAX][0] = -1 * src_tag;
+    RTAG[DFT_REG_RAX][1] = -1 * src_tag;
   } else {
     RTAG[DFT_REG_RAX][0] = tag_traits<tag_t>::cleared_val;
     RTAG[DFT_REG_RAX][1] = tag_traits<tag_t>::cleared_val;
@@ -30,8 +30,8 @@ static void PIN_FAST_ANALYSIS_CALL r2r_unitary_opb_l(THREADID tid,
   }
   
   if (pollution_mode) {
-    RTAG[DFT_REG_RAX][0] = -1;
-    RTAG[DFT_REG_RAX][1] = -1;
+    RTAG[DFT_REG_RAX][0] = -1 * src_tag;
+    RTAG[DFT_REG_RAX][1] = -1 * src_tag;
   } else {
     RTAG[DFT_REG_RAX][0] = tag_traits<tag_t>::cleared_val;
     RTAG[DFT_REG_RAX][1] = tag_traits<tag_t>::cleared_val;
@@ -70,8 +70,8 @@ static void PIN_FAST_ANALYSIS_CALL r2r_unitary_opq(THREADID tid, uint32_t src, A
       flag = 1;
     }
     if (pollution_mode) {
-      RTAG[DFT_REG_RDX][i] = -1;
-      RTAG[DFT_REG_RAX][i] = -1;
+      RTAG[DFT_REG_RDX][i] = -1 * src_tag[i];
+      RTAG[DFT_REG_RAX][i] = -1 * src_tag[i];
     } else {
       RTAG[DFT_REG_RDX][i] = tag_traits<tag_t>::cleared_val;
       RTAG[DFT_REG_RAX][i] = tag_traits<tag_t>::cleared_val;
@@ -91,8 +91,8 @@ static void PIN_FAST_ANALYSIS_CALL r2r_unitary_opl(THREADID tid, uint32_t src, A
       flag = 1;
     }
     if (pollution_mode) {
-      RTAG[DFT_REG_RDX][i] = -1;
-      RTAG[DFT_REG_RAX][i] = -1;
+      RTAG[DFT_REG_RDX][i] = -1 * src_tag[i];
+      RTAG[DFT_REG_RAX][i] = -1 * src_tag[i];
     } else {
       RTAG[DFT_REG_RDX][i] = tag_traits<tag_t>::cleared_val;
       RTAG[DFT_REG_RAX][i] = tag_traits<tag_t>::cleared_val;
@@ -111,8 +111,8 @@ static void PIN_FAST_ANALYSIS_CALL m2r_unitary_opb(THREADID tid, ADDRINT src, AD
   }
 
   if (pollution_mode) {
-    RTAG[DFT_REG_RAX][0] = -1;
-    RTAG[DFT_REG_RAX][1] = -1;
+    RTAG[DFT_REG_RAX][0] = -1 * src_tag;
+    RTAG[DFT_REG_RAX][1] = -1 * src_tag;
   } else {
     RTAG[DFT_REG_RAX][0] = tag_traits<tag_t>::cleared_val;
     RTAG[DFT_REG_RAX][1] = tag_traits<tag_t>::cleared_val;
@@ -129,8 +129,8 @@ static void PIN_FAST_ANALYSIS_CALL m2r_unitary_opw(THREADID tid, ADDRINT src, AD
       insert_taint_mem_info(ARITH_M2R, src+i, *((char *)src+i), src_tag[i], RTN_FindNameByAddress(applicationIP).c_str());
     }
     if (pollution_mode) {
-      RTAG[DFT_REG_RDX][i] = -1;
-      RTAG[DFT_REG_RAX][i] = -1;
+      RTAG[DFT_REG_RDX][i] = -1 * src_tag[i];
+      RTAG[DFT_REG_RAX][i] = -1 * src_tag[i];
     } else {
       RTAG[DFT_REG_RDX][i] = tag_traits<tag_t>::cleared_val;
       RTAG[DFT_REG_RAX][i] = tag_traits<tag_t>::cleared_val;
@@ -151,8 +151,8 @@ static void PIN_FAST_ANALYSIS_CALL m2r_unitary_opq(THREADID tid, ADDRINT src, AD
       insert_taint_mem_info(ARITH_M2R, src+i, *((char *)src+i), src_tag[i], RTN_FindNameByAddress(applicationIP).c_str());
     }
     if (pollution_mode) {
-      RTAG[DFT_REG_RDX][i] = -1;
-      RTAG[DFT_REG_RAX][i] = -1;
+      RTAG[DFT_REG_RDX][i] = -1 * src_tag[i];
+      RTAG[DFT_REG_RAX][i] = -1 * src_tag[i];
     } else {
       RTAG[DFT_REG_RDX][i] = tag_traits<tag_t>::cleared_val;
       RTAG[DFT_REG_RAX][i] = tag_traits<tag_t>::cleared_val;
@@ -173,8 +173,8 @@ static void PIN_FAST_ANALYSIS_CALL m2r_unitary_opl(THREADID tid, ADDRINT src, AD
       insert_taint_mem_info(ARITH_M2R, src+i, *((char *)src+i), src_tag[i], RTN_FindNameByAddress(applicationIP).c_str());
     }
     if (pollution_mode) {
-      RTAG[DFT_REG_RDX][i] = -1;
-      RTAG[DFT_REG_RAX][i] = -1;
+      RTAG[DFT_REG_RDX][i] = -1 * src_tag[i];
+      RTAG[DFT_REG_RAX][i] = -1 * src_tag[i];
     } else {
       RTAG[DFT_REG_RDX][i] = tag_traits<tag_t>::cleared_val;
       RTAG[DFT_REG_RAX][i] = tag_traits<tag_t>::cleared_val;
